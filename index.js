@@ -9,7 +9,7 @@ const path = require("path");
 const allEmployees = [];
 
 newManager = () => {
-    inquirer
+  inquirer
     .prompt([
       {
         type: "input",
@@ -42,10 +42,10 @@ newManager = () => {
       allEmployees.push(nManager);
       newTeammatePrompt();
     });
-  };
-  
+};
+
 newTeammatePrompt = () => {
-    inquirer
+  inquirer
     .prompt([
       {
         type: "list",
@@ -55,21 +55,21 @@ newTeammatePrompt = () => {
       },
     ])
     .then((answers) => {
-        answers.addMember === "Yes"
+      answers.addMember === "Yes"
         ? newTeammate()
         : console.log("team all built!", allEmployees);
     });
-  };
-  
-  newTeammate = () => {
-    inquirer
+};
+
+newTeammate = () => {
+  inquirer
     .prompt([
-        {
-            type: "list",
-            name: "role",
-            message: "Who would you like to add?",
-            choices: ["Engineer", "Intern"],
-          },
+      {
+        type: "list",
+        name: "role",
+        message: "Who would you like to add?",
+        choices: ["Engineer", "Intern"],
+      },
       {
         type: "input",
         name: "empName",
@@ -98,33 +98,33 @@ newTeammatePrompt = () => {
         name: "intSchool",
         message: "Please enter your interns school",
         when: function (answers) {
-            return answers.role === "Intern";
-          },
+          return answers.role === "Intern";
+        },
       },
     ])
     .then((answers) => {
-        if (answers.role === "Engineer") {
-            const nEng = new Engineer(
-              answers.empName,
-              answers.empID,
-              answers.empEmail,
-              answers.gitHub
-            );
-            allEmployees.push(nEng);
-        } else if (answers.role === "Intern") {
-            const nIntern = new Intern(
-              answers.empName,
-              answers.empID,
-              answers.empEmail,
-              answers.intSchool
-            );
-            allEmployees.push(nIntern);
-        }
-        newTeammatePrompt();
+      if (answers.role === "Engineer") {
+        const nEng = new Engineer(
+          answers.empName,
+          answers.empID,
+          answers.empEmail,
+          answers.gitHub
+        );
+        allEmployees.push(nEng);
+      } else if (answers.role === "Intern") {
+        const nIntern = new Intern(
+          answers.empName,
+          answers.empID,
+          answers.empEmail,
+          answers.intSchool
+        );
+        allEmployees.push(nIntern);
+      }
+      newTeammatePrompt();
     });
-  };
+};
 
-  // const addTeamMate = () =>
+// const addTeamMate = () =>
 //   new Promise((resolve, reject) => {
 //     inquirer
 //       .prompt([
@@ -144,20 +144,18 @@ newTeammatePrompt = () => {
 //   });
 
 function init() {
-    console.log("Please build your team");
-    newManager();
-    //   inquirer
-    //     .prompt(questions)
-    //     .then((data) => {
-    //       console.log(data);
-    //     })
-    //     .catch((err) => console.error(err));
-  }
-  
-  // Function call to initialize app
-  init();
+  console.log("Please build your team");
+  newManager();
+  //   inquirer
+  //     .prompt(questions)
+  //     .then((data) => {
+  //       console.log(data);
+  //     })
+  //     .catch((err) => console.error(err));
+}
 
-
+// Function call to initialize app
+init();
 
 // .then((answers) => {
 //     switch (answers.choices) {
