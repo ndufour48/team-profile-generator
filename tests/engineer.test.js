@@ -11,7 +11,12 @@ describe("github username", () => {
 describe("getRole", () => {
   it("should get employee type ", () => {
     const roleType = "Engineer";
-    const eng = new Engineer("Nick", 123, "someEmail@gmail.com");
+    const eng = new Engineer(
+        "Nick",
+        123,
+        "someEmail@gmail.com",
+        "ndufour48"
+      );
     expect(eng.getRole()).toBe(roleType);
   });
 });
