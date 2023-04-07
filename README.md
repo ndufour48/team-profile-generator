@@ -28,7 +28,7 @@ Use "node index.js" in command terminal to initiate the app. Proceed by answerin
 
 # Demo
 
-[![Link to demo on google drive](https://cdn-icons-png.flaticon.com/512/5359/5359890.png)]()
+[![Link to demo on google drive](https://cdn-icons-png.flaticon.com/512/5359/5359890.png)](https://drive.google.com/file/d/1SO0todchKtoAhRrRGGUXq1haIOx_U6S0/view)
 
 # Questions
 
