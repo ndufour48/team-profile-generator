@@ -5,7 +5,7 @@ const Manager = require("./Lib/manager");
 const fs = require("fs");
 const inquirer = require("inquirer");
 const path = require("path");
-const generateHTML = require("./generateHTML");
+const createCards = require("./generateHTML");
 const allEmployees = [];
 
 function writeToFile(fileName, data) {
@@ -66,7 +66,7 @@ newTeammatePrompt = () => {
       } else {
         console.log("team all built!", allEmployees);
         const fileName = "src/team.html";
-        writeToFile(fileName, generateHTML(allEmployees));
+        writeToFile(fileName, createCards(allEmployees));
       }
     });
 };
@@ -141,20 +141,3 @@ function init() {
 
 // Function call to initialize app
 init();
-
-module.exports = allEmployees;
-
-// addTeamMate = (role) => {
-//   switch (answers.choices) {
-//     case "Engineer":
-//       response = newEngineer();
-//       break;
-//     case "Intern":
-//       response = newIntern();
-//       break;
-//     case "No one else to add":
-//       response = "";
-//       break;
-//   }
-//   return answers[role];
-// };
