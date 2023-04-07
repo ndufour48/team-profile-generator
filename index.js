@@ -5,8 +5,14 @@ const Manager = require("./Lib/manager");
 const fs = require("fs");
 const inquirer = require("inquirer");
 const path = require("path");
-
+const generateHTML = require("./generateHTML");
 const allEmployees = [];
+
+function writeToFile(fileName, data) {
+  fs.writeFileSync(path.join(__dirname, fileName), data, (err) =>
+    err ? console.log(err) : console.log("Success!")
+  );
+}
 
 newManager = () => {
   inquirer
@@ -55,9 +61,13 @@ newTeammatePrompt = () => {
       },
     ])
     .then((answers) => {
-      answers.addMember === "Yes"
-        ? newTeammate()
-        : console.log("team all built!", allEmployees);
+      if (answers.addMember === "Yes") {
+        newTeammate();
+      } else {
+        console.log("team all built!", allEmployees);
+        const fileName = "src/team.html";
+        writeToFile(fileName, generateHTML(allEmployees));
+      }
     });
 };
 
@@ -124,53 +134,15 @@ newTeammate = () => {
     });
 };
 
-// const addTeamMate = () =>
-//   new Promise((resolve, reject) => {
-//     inquirer
-//       .prompt([
-//         {
-//           type: "list",
-//           name: "addMember",
-//           message: "Would you like to add anyone to your team?",
-//           choices: ["Yes", "No"],
-//         },
-//       ])
-//       .then((answers) => {
-//         answers.addMember === "Yes"
-//           ? resolve(newTeammate())
-//           : reject(console.log("team all built!"));
-//       });
-//     resolve;
-//   });
-
 function init() {
   console.log("Please build your team");
   newManager();
-  //   inquirer
-  //     .prompt(questions)
-  //     .then((data) => {
-  //       console.log(data);
-  //     })
-  //     .catch((err) => console.error(err));
 }
 
 // Function call to initialize app
 init();
 
-// .then((answers) => {
-//     switch (answers.choices) {
-//       case "Engineer":
-//         response = newEngineer();
-//         break;
-//       case "Intern":
-//         response = newIntern();
-//         break;
-//       case "No one else to add":
-//         response = "";
-//         break;
-//     }
-//     return answers[response];
-//   });
+module.exports = allEmployees;
 
 // addTeamMate = (role) => {
 //   switch (answers.choices) {
@@ -185,72 +157,4 @@ init();
 //       break;
 //   }
 //   return answers[role];
-// };
-
-// newEngineer = () => {
-//   inquirer
-//     .prompt([
-//       {
-//         type: "input",
-//         name: "engName",
-//         message: "Please enter your engineers name",
-//       },
-//       {
-//         type: "input",
-//         name: "engID",
-//         message: "Please enter your engineers ID number",
-//       },
-//       {
-//         type: "input",
-//         name: "engEmail",
-//         message: "Please enter your engineers email",
-//       },
-//       {
-//         type: "input",
-//         name: "gitHub",
-//         message: "Please enter your engineers GitHub username",
-//       },
-//     ])
-//     .then((answers) => {
-//       const nEng = new Engineer(
-//         answers.engName,
-//         answers.engID,
-//         answers.engEmail,
-//         answers.gitHub
-//       );
-//     });
-// };
-
-// newIntern = () => {
-//   inquirer
-//     .prompt([
-//       {
-//         type: "input",
-//         name: "intName",
-//         message: "Please enter your intern's name",
-//       },
-//       {
-//         type: "input",
-//         name: "intID",
-//         message: "Please enter your interns ID number",
-//       },
-//       {
-//         type: "input",
-//         name: "intEmail",
-//         message: "Please enter your interns email",
-//       },
-//       {
-//         type: "input",
-//         name: "intSchool",
-//         message: "Please enter your interns school",
-//       },
-//     ])
-//     .then((answers) => {
-//       const nIntern = new Intern(
-//         answers.intName,
-//         answers.intID,
-//         answers.intEmail,
-//         answers.intSchool
-//       );
-//     });
 // };
